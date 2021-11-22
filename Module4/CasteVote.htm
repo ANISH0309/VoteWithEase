@@ -39,6 +39,23 @@
 
 
 <script>
+    $.ajax({
+            method:"GET",
+            url:"https://votewithease.herokuapp.com/candidates",
+            headers: {
+                "Authorization": sessionStorage.token
+            },
+            success:function(data){
+                console.log(data);
+            },
+            error:function(err){
+                console.log(err)
+            }
+        })
+    const imgs = [
+         "./CasteVote_files/1.jpg",
+            "https://votewithease.herokuapp.com/images/2.jpg",
+    ]
     const candidates = JSON.parse(sessionStorage['candidateData']).candidates
     console.log(typeof(candidates))
     for(i =0 ; i<candidates.length ; i++ ){
@@ -55,7 +72,7 @@
                     </h2>
                     <div class="mc-content">
                         <div class="img-container">
-                            <img class="img-responsive" src="${candidates[i].image}">
+                            <img class="img-responsive" src="${imgs[i]}">
                         </div>
                         <div class="mc-description">
                             ${candidates[i].about}
