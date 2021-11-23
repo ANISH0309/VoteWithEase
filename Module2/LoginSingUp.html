@@ -537,7 +537,6 @@
 						name="myForm1"
 						align="center"
 						id="Login"
-						novalidate
 					>
 						<p>
 							<input
@@ -546,7 +545,7 @@
 								id="luname"
 								ng-model="email"
 								placeholder="Email"
-								required=""
+								required
 							/>
 							<span
 								style="color: black; font-size: 12px; margin-left: 25px"
@@ -568,7 +567,7 @@
 								name="lpwd"
 								ng-model="password"
 								placeholder="Password"
-								required=""
+								required
 							/>
 							<span
 								style="color: black; font-size: 12px"
@@ -651,8 +650,8 @@
 		<script type="text/javascript">
 			var app = angular.module("myApp", []);
 			app.controller("validateCtrl", function ($scope) {
-				$scope.email = "example@gmail.com";
-				$scope.password = "john.doe@gmail.com";
+				$scope.email = "";
+				$scope.password = "";
 			});
 
 			document
@@ -686,11 +685,6 @@
 				.getElementById("Login")
 				.addEventListener("submit", function (event) {
 					event.preventDefault();
-					// var app = angular.module("myApp", []);
-					// app.controller("validateCtrl", function ($scope) {
-					// 	$scope.email = "example@gmail.com";
-					// 	$scope.password = "xxxxxx";
-					// });
 					$.ajax({
 						method: "POST",
 						url: "https://votewithease.herokuapp.com/signin",
