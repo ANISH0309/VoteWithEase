@@ -12,10 +12,8 @@
 			href="http://first_one.surge.sh/images/icon.png"
 			type="image/x-icon"
 		/>
-		<!-- <link
-      rel="stylesheet"
-      href="./Log In _ Sign Up_files/font-awesome.min.css"
-    /> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 		<link
 			rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
@@ -508,7 +506,7 @@
 					<a
 						class="btn pulse"
 						href="../Module2/LoginSingUp.html#open-modal1"
-						style="position: absolute; top: 79%; left: 40.5%; height: 22px"
+						style="position: absolute; top: 80%; left: 40.5%; height: 22px"
 					>
 						Log In</a
 					>
@@ -533,23 +531,64 @@
 						>+</a
 					>
 					<h2 style="text-align: center; color: #fff">Login</h2>
-					<form name="myForm1" align="center" id="Login">
-						<input
-							type="text"
-							name="luname"
-							id="luname"
-							placeholder="Email"
-							required=""
-						/><br />
-						<input
-							type="password"
-							id="lpass"
-							name="lpwd"
-							placeholder="Password"
-							required=""
-						/><br />
+					<form
+						ng-app="myApp"
+						ng-controller="validateCtrl"
+						name="myForm1"
+						align="center"
+						id="Login"
+						novalidate
+					>
+						<p>
+							<input
+								type="text"
+								name="luname"
+								id="luname"
+								ng-model="email"
+								placeholder="Email"
+								required
+							/>
+							<span
+								style="color: black; font-size: 12px; margin-left: 25px"
+								ng-show="myForm1.email.$dirty && myForm.email.$invalid"
+							>
+								<span ng-show="myForm1.email.$error.required"
+									>Email is required.</span
+								>
+								<span ng-show="myForm1.email.$error.email"
+									>Invalid email address.</span
+								>
+							</span>
+						</p>
+						<!-- <br /> -->
+						<p>
+							<input
+								type="password"
+								id="lpass"
+								name="lpwd"
+								ng-model="password"
+								placeholder="Password"
+								required=""
+							/>
+							<span
+								style="color: black; font-size: 12px"
+								ng-show="myForm1.password.$dirty && myForm1.password.$invalid"
+							>
+								<span ng-show="myForm1.password.$error.required"
+									>Password is required.</span
+								>
+							</span>
+						</p>
+						<br />
 						<p id="pss"></p>
-						<input type="submit" name="login" value="Login" id="login_btn" />
+						<input
+							type="submit"
+							ng-disabled="myForm1.email.$dirty && myForm1.email.$invalid ||
+						myForm1.password.$dirty && myForm1.password.$invalid"
+							name="login"
+							value="Login"
+							id="login_btn"
+						/>
 					</form>
 				</div>
 			</div>
@@ -610,149 +649,17 @@
 		</div>
 
 		<script type="text/javascript">
-			// function ValidateEmail(mail) {
-			//   if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail)) {
-			//     return true;
-			//   }
-			//   return false;
-			// }
-
-			// var signup_data = {};
-
-			// document.querySelector("i").addEventListener("click", function () {
-			//   window.location.href = "./index.html";
-			// });
-
-			// document.myForm1.login.addEventListener("click", function () {
-			//   if (document.myForm1.luname.value == "") {
-			//     Notify({
-			//       content: "Username must be filled out",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 2000,
-			//     });
-			//   }
-			//   if (document.myForm1.lpass.value == "") {
-			//     Notify({
-			//       content: "Password must be filled out",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 3000,
-			//     });
-			//   }
-
-			//   if (
-			//     (document.myForm1.luname.value == signup_data["username"] &&
-			//       document.myForm1.lpass.value == signup_data["password"]) ||
-			//     (document.myForm1.luname.value == "admin" &&
-			//       document.myForm1.lpass.value == "pass")
-			//   ) {
-			//     Notify({
-			//       content: "Login Successful",
-			//       color: "green",
-			//       rounded: true,
-			//       timeout: 3000,
-			//     });
-			//     $.post(
-			//       "https://votewithease.herokuapp.com/signin",
-			//       {
-			//         password: "Mihi679696",
-			//         email: "mmkhsdcsdfdsdsmdk@odx23do.com",
-			//       },
-			//       function (data, status) {
-			//         alert("Data: " + data + "\nStatus: " + status);
-			//       }
-			//     );
-			//     setTimeout(function () {
-			//       window.location.href = "../Module3/ChooseDropCreate.htm";
-			//     }, 2000);
-			//   } else if (
-			//     document.myForm1.luname.value != "" &&
-			//     document.myForm1.lpass.value != ""
-			//   ) {
-			//     Notify({
-			//       content: "Invalid Credentials",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 3000,
-			//     });
-			//   }
-			// });
-
-			// document.myForm2.signup.addEventListener("click", function () {
-			//   if (document.myForm2.suname.value == "") {
-			//     Notify({
-			//       content: "Username must be filled out",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 2000,
-			//     });
-			//   }
-
-			//   if (document.myForm2.email.value == "") {
-			//     Notify({
-			//       content: "Email must be filled out",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 3000,
-			//     });
-			//   } else if (ValidateEmail(document.myForm2.email.value) == false) {
-			//     Notify({
-			//       content: "Email must be valid",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 3000,
-			//     });
-			//   }
-
-			//   if (document.myForm2.mobile.value == "") {
-			//     Notify({
-			//       content: "Mobile Number must be filled out",
-			//       color:
-			//         "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//       rounded: true,
-			//       timeout: 4000,
-			//     });
-			//   }
-
-			// if (document.myForm2.spass.value == "") {
-			//   Notify({
-			//     content: "Password must be filled out",
-			//     color:
-			//       "linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%)",
-			//     rounded: true,
-			//     timeout: 5000,
-			//   });
-			// }
-
-			// if (
-			//   document.myForm2.suname.value != "" &&
-			//   document.myForm2.email.value != "" &&
-			//   document.myForm2.spass.value != "" &&
-			//   document.myForm2.mobile.value != ""
-			// ) {
-			//   signup_data["username"] = document.myForm2.suname.value;
-			//   signup_data["email"] = document.myForm2.email.value;
-			//   signup_data["mobile"] = document.myForm2.mobile.value;
-			//   signup_data["password"] = document.myForm2.spass.value;
-
-			//   Notify({
-			//     content: "Signup Successful",
-			//     color: "green",
-			//     rounded: true,
-			//     timeout: 3000,
-			//   });
+			var app = angular.module("myApp", []);
+			app.controller("validateCtrl", function ($scope) {
+				$scope.email = "example@gmail.com";
+				$scope.password = "john.doe@gmail.com";
+			});
 
 			document
 				.getElementById("Submit")
 				.addEventListener("submit", function (event) {
 					event.preventDefault();
+
 					$.ajax({
 						method: "POST",
 						url: "https://votewithease.herokuapp.com/signup",
@@ -779,6 +686,11 @@
 				.getElementById("Login")
 				.addEventListener("submit", function (event) {
 					event.preventDefault();
+					// var app = angular.module("myApp", []);
+					// app.controller("validateCtrl", function ($scope) {
+					// 	$scope.email = "example@gmail.com";
+					// 	$scope.password = "xxxxxx";
+					// });
 					$.ajax({
 						method: "POST",
 						url: "https://votewithease.herokuapp.com/signin",
