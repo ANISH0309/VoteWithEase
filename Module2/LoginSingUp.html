@@ -658,7 +658,7 @@
 			//     $.post(
 			//       "https://votewithease.herokuapp.com/signin",
 			//       {
-			//         password: "Mihi679696",
+			//         password: "",
 			//         email: "mmkhsdcsdfdsdsmdk@odx23do.com",
 			//       },
 			//       function (data, status) {
@@ -752,6 +752,7 @@
 			document
 				.getElementById("Submit")
 				.addEventListener("submit", function (event) {
+					console.log("submit");
 					event.preventDefault();
 					$.ajax({
 						method: "POST",

@@ -306,6 +306,9 @@
           alert("No photo selected");
         } else if (about == null || about == "") {
           alert("About cannot be blank");
+        } else {
+          alert("Form submitted successfully");
+          window.location = "../Module3/ChooseDropCreate.htm";
         }
       }
 
@@ -353,8 +356,7 @@
               console.log(err);
             },
           });
-          
-            alert("Candidate Registration Successful");
+
           
 
         });
