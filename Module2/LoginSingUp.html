@@ -12,10 +12,8 @@
 			href="http://first_one.surge.sh/images/icon.png"
 			type="image/x-icon"
 		/>
-		<!-- <link
-      rel="stylesheet"
-      href="./Log In _ Sign Up_files/font-awesome.min.css"
-    /> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 		<link
 			rel="stylesheet"
 			href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css"
@@ -508,7 +506,7 @@
 					<a
 						class="btn pulse"
 						href="../Module2/LoginSingUp.html#open-modal1"
-						style="position: absolute; top: 79%; left: 40.5%; height: 22px"
+						style="position: absolute; top: 80%; left: 40.5%; height: 22px"
 					>
 						Log In</a
 					>
@@ -533,23 +531,63 @@
 						>+</a
 					>
 					<h2 style="text-align: center; color: #fff">Login</h2>
-					<form name="myForm1" align="center" id="Login">
-						<input
-							type="text"
-							name="luname"
-							id="luname"
-							placeholder="Email"
-							required=""
-						/><br />
-						<input
-							type="password"
-							id="lpass"
-							name="lpwd"
-							placeholder="Password"
-							required=""
-						/><br />
+					<form
+						ng-app="myApp"
+						ng-controller="validateCtrl"
+						name="myForm1"
+						align="center"
+						id="Login"
+					>
+						<p>
+							<input
+								type="text"
+								name="luname"
+								id="luname"
+								ng-model="email"
+								placeholder="Email"
+								required
+							/>
+							<span
+								style="color: black; font-size: 12px; margin-left: 25px"
+								ng-show="myForm1.email.$dirty && myForm1.email.$invalid"
+							>
+								<span ng-show="myForm1.email.$error.required"
+									>Email is required.</span
+								>
+								<span ng-show="myForm1.email.$error.email"
+									>Invalid email address.</span
+								>
+							</span>
+						</p>
+						<!-- <br /> -->
+						<p>
+							<input
+								type="password"
+								id="lpass"
+								name="lpwd"
+								ng-model="password"
+								placeholder="Password"
+								required
+							/>
+							<span
+								style="color: black; font-size: 12px"
+								ng-show="myForm1.password.$dirty && myForm1.password.$invalid"
+							>
+								<span ng-show="myForm1.password.$error.required"
+									>Password is required.</span
+								>
+							</span>
+						</p>
+						<br />
 						<p id="pss"></p>
-						<input type="submit" name="login" value="Login" id="login_btn" />
+						<input
+							type="submit"
+							ng-disabled="myForm1.email.$dirty && myForm1.email.$invalid ||
+						myForm1.password.$dirty && myForm1.password.$invalid"
+							name="login"
+							value="Login"
+							id="login_btn"
+						/>
 					</form>
 				</div>
 			</div>
@@ -748,12 +786,18 @@
 			//     rounded: true,
 			//     timeout: 3000,
 			//   });
+			var app = angular.module("myApp", []);
+			app.controller("validateCtrl", function ($scope) {
+				$scope.email = "";
+				$scope.password = "";
+			});
 
 			document
 				.getElementById("Submit")
 				.addEventListener("submit", function (event) {
 					console.log("submit");
 					event.preventDefault();
+
 					$.ajax({
 						method: "POST",
 						url: "https://votewithease.herokuapp.com/signup",
